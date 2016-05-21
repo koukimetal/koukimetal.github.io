@@ -135,7 +135,7 @@ var makeNewNode = function (node, action) {
     var password = $("#password").val();
     localStorage.setItem(JSTREECHAT_NAME, username);
     localStorage.setItem(JSTREECHAT_PASS, password);
-    $.post("core.php",
+    $.post("http://turtle.matrix.jp/my_services/jsTreeChat/core.php",
         {
             action: action,
             parentId: node.parent,
@@ -152,7 +152,7 @@ var makeNewNode = function (node, action) {
 var disableNode = function (node) {
     var password = $("#password").val();
     localStorage.setItem(JSTREECHAT_PASS, password);
-    $.post("core.php",
+    $.post("http://turtle.matrix.jp/my_services/jsTreeChat/core.php",
         {
             action: 'disable',
             id: node.id,
