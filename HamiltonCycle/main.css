@@ -1,0 +1,11 @@
+#problem {
+    height: 600px;
+    border: 1px solid lightgray;
+}
+#specialThanks {
+    text-align:center;
+}
+.graph-tab {
+    margin-top: 10px;
+    margin-left: 10px;
+}
