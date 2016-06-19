@@ -1,0 +1,16 @@
+#graph {
+    height: 600px;
+    border: 1px solid lightgray;
+}
+#specialThanks {
+    text-align:center;
+}
+.options {
+    display: inline-block;
+}
+#destination.vertexInput,
+#source.vertexInput
+{
+    width: 70px;
+    height: 23px;
+}

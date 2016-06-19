@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-77436922-1', 'auto');
+        ga('send', 'pageview');
+
+    </script>
+
+    <title>Graph Visualizer</title>
+
+    <script type="text/javascript" src="3rd/jquery.js"></script>
+
+    <script type="text/javascript" src="3rd/vis/vis.js"></script>
+    <link rel="stylesheet" type="text/css" href="3rd/vis/vis.css" />
+
+    <script type="text/javascript" src="3rd/bootstrap/js/bootstrap.js"></script>
+    <link rel="stylesheet" type="text/css" href="3rd/bootstrap/css/bootstrap.css" />
+
+    <script type="text/javascript" src="main.js"></script>
+    <link rel="stylesheet" type="text/css" href="main.css" />
+</head>
+<body>
+    <div id="graph"></div>
+    <div class="form-group">
+        <label>Options:</label>
+        <div class="checkbox options">
+            <label>
+                <input type="checkbox" id="from1"> from 1
+            </label>
+        </div>
+        <div class="checkbox options">
+            <label>
+                <input type="checkbox" id="directed"> directed
+            </label>
+        </div>
+        <div class="checkbox options">
+            <label>
+                <input type="checkbox" id="edgeValue"> edgeValue
+            </label>
+        </div>
+        <div><label for="input">Input:</label></div>
+        <form class="form-inline">
+            <div class="form-group">
+                <label for="source">src:</label>
+                <input type="text" class="form-control vertexInput" id="source">
+            </div>
+            <div class="form-group">
+                <label for="destination">dst:</label>
+                <input type="text" class="form-control vertexInput" id="destination">
+            </div>
+        </form>
+        <textarea class="form-control" rows="5" id="input"></textarea>
+    </div>
+    <button id="visualize" type="button" class="btn btn-default">Visualize</button>
+    <div id="specialThanks">I just used <a href="http://visjs.org/">visjs</a></div>
+</body>
+</html>
