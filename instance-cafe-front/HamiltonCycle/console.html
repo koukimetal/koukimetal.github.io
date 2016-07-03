@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Hamilton Cycle</title>
+
+    <script type="text/javascript" src="../3rd/jquery.js"></script>
+
+    <script type="text/javascript" src="../3rd/bootstrap/js/bootstrap.js"></script>
+    <link rel="stylesheet" type="text/css" href="../3rd/bootstrap/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="main.css" />
+    <script src="../3rd/clipboard.js"></script>
+</head>
+<body>
+    <script>
+        new Clipboard('.copy_btn');
+    </script>
+    <div id="description" class="tab-pane fade in active">
+        <b>HamiltonCycle</b>: You should find a cycle which contains all vertices.<br>
+    </div>
+    <hr>
+    <label for="rawData">Raw Data</label>
+    <textarea readonly id="rawData" class="form-control" rows="10"></textarea>
+    <button class="copy_btn btn btn-default btn-sm"
+            data-clipboard-target="#rawData">Copy</button>
+    <hr>
+    <label for="MyHamilton">Your Answer</label>
+    <textarea id="MyHamilton" class="form-control" rows="2"></textarea>
+    <button id="submitAnswer" class="btn btn-default btn-sm">Submit</button>
+    <script type="text/javascript" src="paramLoader.js"></script>
+    <script type="text/javascript" src="console.js"></script>
+</body>
+</html>

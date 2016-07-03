@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Hamilton Cycle</title>
+
+    <script type="text/javascript" src="../3rd/jquery.js"></script>
+
+    <script type="text/javascript" src="../3rd/vis/vis.js"></script>
+    <link rel="stylesheet" type="text/css" href="../3rd/vis/vis.css" />
+
+    <script type="text/javascript" src="../3rd/bootstrap/js/bootstrap.js"></script>
+    <link rel="stylesheet" type="text/css" href="../3rd/bootstrap/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="main.css" />
+    <script src="../3rd/clipboard.js"></script>
+</head>
+<body>
+    <div id="problem"></div>
+    <script>
+        new Clipboard('.copy_btn');
+    </script>
+
+    <ul class="nav nav-tabs">
+        <li class="active"><a data-toggle="tab" href="#description">Description</a></li>
+        <li><a data-toggle="tab" href="#option">Option</a></li>
+        <li><a data-toggle="tab" href="#data">Data</a></li>
+    </ul>
+    <div class="tab-content graph-tab">
+        <div id="description" class="tab-pane fade in active">
+            <b>HamiltonCycle</b>: You should find a cycle which contains all vertices.<br>
+            <b>Double click!</b>, then you can select a vertex. It should become yellow.<br>
+            When you selected a vertex again,<br>
+            if the previous selected vertex has an edge to the selected vertex,<br>
+            we recognize that you want to use the edge to make hamilton cycle.<br>
+            If the edge was already used, the edge should be canceled.<br>
+            You can cancel the selected vertex, when you double clicked it again.
+        </div>
+        <div id="option" class="tab-pane fade">
+            <div class="checkbox options">
+                <label>
+                    <input type="checkbox" id="physics" checked> physics system
+                </label>
+            </div>
+            <div class="checkbox options">
+                <label>
+                    <input type="checkbox" id="smooth" checked> smooth
+                </label>
+            </div>
+        </div>
+        <div id="data" class="tab-pane fade">
+            <label for="rawData">Raw Data</label>
+            <textarea readonly id="rawData" class="form-control" rows="3"></textarea>
+            <button class="copy_btn btn btn-default btn-sm"
+                    data-clipboard-target="#rawData">Copy</button>
+            <hr>
+            <label for="MyHamilton">Your Answer</label>
+            <textarea readonly id="MyHamilton" class="form-control" rows="2"></textarea>
+            <button class="copy_btn btn btn-default btn-sm"
+                    data-clipboard-target="#MyHamilton">Copy</button>
+        </div>
+    </div>
+    <script type="text/javascript" src="main.js"></script>
+    <script type="text/javascript" src="paramLoader.js"></script>
+    <script type="text/javascript" src="game.js"></script>
+    <div id="specialThanks">I just used <a href="http://visjs.org/">visjs</a></div>
+</body>
+</html>

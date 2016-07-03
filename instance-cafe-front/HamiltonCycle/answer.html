@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Hamilton Cycle</title>
+
+    <script type="text/javascript" src="../3rd/jquery.js"></script>
+
+    <script type="text/javascript" src="../3rd/bootstrap/js/bootstrap.js"></script>
+    <link rel="stylesheet" type="text/css" href="../3rd/bootstrap/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="main.css" />
+    <script src="../3rd/clipboard.js"></script>
+</head>
+<body>
+    <script>
+        new Clipboard('.copy_btn');
+    </script>
+    <div id="description" class="tab-pane fade in active">
+        <b>HamiltonCycle</b>: This is a cycle which includes all vertices.<br>
+    </div>
+    <hr>
+    <label for="answer">Answer</label>
+    <textarea readonly id="answer" class="form-control" rows="3"></textarea>
+    <button class="copy_btn btn btn-default btn-sm"
+            data-clipboard-target="#answer">Copy</button>
+    <script type="text/javascript" src="paramLoader.js"></script>
+    <script type="text/javascript" src="answer.js"></script>
+</body>
+</html>
