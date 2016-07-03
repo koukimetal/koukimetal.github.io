@@ -1,8 +1,8 @@
 "use strict";
 //WISH show degree
 var HamiltonCycle = function (N, M) {
-    this.N = N;
     this.nodes = this.makeNodes(N);
+    M = Math.min(M, Math.floor((N*(N-1))/2));
     this.edges = this.makeEdges(this.makeRandomEdge(N, M));
     this.container = document.getElementById('problem');
     this.data = {
@@ -13,7 +13,11 @@ var HamiltonCycle = function (N, M) {
     for (var i = 0; i < N; i++) {
         this.degree[i] = 0;
     }
-    var options = {};
+    this.options = {
+        physics: {
+            enabled: true
+        }
+    };
 
     this.SELECTED_NODE = '#ffff99';
     this.PASSED_NODE = '#ccff99';
@@ -23,10 +27,9 @@ var HamiltonCycle = function (N, M) {
     this.edgeSet = new Set();
     this.selected = -1;
 
-    this.network = new vis.Network(this.container, this.data, options);
+    this.network = new vis.Network(this.container, this.data, this.options);
     this.network.on("doubleClick", function (params) {
-        console.log(params);
-        if (params.nodes.length == 0 || this.finished) {
+        if (params.nodes.length == 0) {
             return;
         }
         var id = params.nodes[0];
@@ -109,7 +112,6 @@ HamiltonCycle.prototype.makeRandomEdge = function(N, M) {
             continue;
         }
 
-        console.log(a, b);
         res[2*ecnt] = a;
         res[2*ecnt + 1] = b;
         ecnt++;
@@ -130,32 +132,34 @@ HamiltonCycle.prototype.handleDoubleClicked = function(id, neighborIds) {
     }
     this.move(id, edgeId);
     if (edgeId >= 0) {
-        var ok = this.check();
-        if (ok) {
+        var result = this.check();
+        if (result.ok) {
             alert('Congratulation!');
+            $('#MyHamilton').val(result.route.join(' '));
         }
     }
 };
 
-HamiltonCycle.prototype.recCheck = function(id, visited, graph) {
+HamiltonCycle.prototype.recCheck = function(id, visited, graph, route, depth) {
     visited[id] = true;
+    route[depth] = id;
     for (var i = 0; i < graph[id].length; i++) {
         var next = graph[id][i];
         if (visited[next] !== true) {
-            this.recCheck(next, visited, graph);
+            this.recCheck(next, visited, graph, route, depth + 1);
         }
     }
 };
 
 HamiltonCycle.prototype.check = function(){
-    for (var i = 0; i < this.N; i++) {
+    for (var i = 0; i < this.nodes.length; i++) {
         if (this.degree[i] != 2) {
             return false;
         }
     }
 
-    var graph = new Array(this.N);
-    for (i = 0; i < this.N; i++) {
+    var graph = new Array(this.nodes.length);
+    for (i = 0; i < this.nodes.length; i++) {
         graph[i] = [];
     }
 
@@ -165,16 +169,23 @@ HamiltonCycle.prototype.check = function(){
         graph[edge.to].push(edge.from);
     }.bind(this));
 
-    var visited = new Array(this.N);
-    this.recCheck(0, visited, graph);
+    var route = new Array(this.nodes.length + 1);
+    var visited = new Array(this.nodes.length);
+    this.recCheck(0, visited, graph, route, 0);
 
-    for (i = 0; i < this.N; i++) {
+    for (i = 0; i < this.nodes.length; i++) {
         if (visited[i] !== true) {
-            return false;
+            return {
+                ok: false
+            };
         }
     }
 
-    return true;
+    route[this.nodes.length] = 0;
+    return {
+        ok: true,
+        route: route
+    };
 };
 
 HamiltonCycle.prototype.move = function(id, edgeId) {
@@ -270,21 +281,66 @@ HamiltonCycle.prototype.getEdge = function(neighborIds, fId, tId) {
     return -1;
 };
 
+HamiltonCycle.prototype.export = function() {
+    var res = new Array(this.edges.length + 1);
+    res[0] = this.nodes.length + ' ' + this.edges.length;
+    for (var i = 0; i < this.edges.length; i++) {
+        var edge = this.edges.get(i);
+        res[i + 1] = edge.from + ' ' + edge.to;
+    }
+    return res.join('\n');
+};
+
+HamiltonCycle.prototype.setPhysics = function(physics) {
+    this.network.setOptions({physics: {
+        enabled: physics
+    }});
+};
+
+
+HamiltonCycle.prototype.setSmooth = function(smooth) {
+    this.network.setOptions({edges: {
+        smooth: {
+            enabled: smooth
+        }
+    }});
+};
+
 var hamiltonCycle = new HamiltonCycle(15, Math.floor(15 * 1.5));
 
-$(function(){
-    $('#generate').click(function() {
-        var N = $('#vertex').val();
-        var operator = $('#operator').val();
-        var edge = $('#edge').val();
-        var M = 0;
-        if (operator === 'plus') {
-            M = N + edge;
-        } else if (operator === 'multi') {
-            M = N * edge;
-        }
-        M = Math.floor(M);
-        hamiltonCycle = new HamiltonCycle(N, M);
-    });
+var handlePhysics = function() {
+    var physics = $('#physics').is(':checked');
+    hamiltonCycle.setPhysics(physics);
+};
+
+var handleSmooth = function() {
+    var smooth = $('#smooth').is(':checked');
+    hamiltonCycle.setSmooth(smooth);
+};
+
+$('#rawData').val(hamiltonCycle.export());
+
+$('#generate').click(function() {
+    var N = $('#vertex').val();
+    var operator = $('#operator').val();
+    var edge = $('#edge').val();
+    var M = 0;
+    if (operator === 'plus') {
+        M = N + edge;
+    } else if (operator === 'multi') {
+        M = N * edge;
+    }
+    M = Math.floor(M);
+    hamiltonCycle = new HamiltonCycle(N, M);
+    $('#rawData').val(hamiltonCycle.export());
+    handlePhysics();
+    handleSmooth();
 });
 
+$('#physics').click(function() {
+    handlePhysics();
+});
+
+$('#smooth').click(function() {
+    handleSmooth();
+});
