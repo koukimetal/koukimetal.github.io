@@ -4,22 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Hamilton Cycle</title>
-
-    <script type="text/javascript" src="../3rd/jquery.js"></script>
-
-    <script type="text/javascript" src="../3rd/vis/vis.js"></script>
-    <link rel="stylesheet" type="text/css" href="../3rd/vis/vis.css" />
-
-    <script type="text/javascript" src="../3rd/bootstrap/js/bootstrap.js"></script>
-    <link rel="stylesheet" type="text/css" href="../3rd/bootstrap/css/bootstrap.css" />
-    <link rel="stylesheet" type="text/css" href="main.css" />
-    <script src="../3rd/clipboard.js"></script>
 </head>
 <body>
     <div id="problem"></div>
-    <script>
-        new Clipboard('.copy_btn');
-    </script>
 
     <ul class="nav nav-tabs">
         <li class="active"><a data-toggle="tab" href="#description">Description</a></li>
@@ -60,9 +47,8 @@
                     data-clipboard-target="#MyHamilton">Copy</button>
         </div>
     </div>
-    <script type="text/javascript" src="main.js"></script>
-    <script type="text/javascript" src="paramLoader.js"></script>
-    <script type="text/javascript" src="game.js"></script>
+    <script src="../../core.bundle.js"></script>
+    <script>EntryPoint.initHamiltonGame();</script>
     <div id="specialThanks">I just used <a href="http://visjs.org/">visjs</a></div>
 </body>
 </html>
