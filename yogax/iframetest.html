@@ -1,8 +1,16 @@
 <html>
 <head></head>
 <body><div id="content">hello!</div>
+  <div>no sandbox</div>
   <iframe src="./iframe.html"></iframe>
+  <div>sandbox with empty</div>
   <iframe src="./iframe.html" sandbox></iframe>
+    <div>sandbox allow-same-origin</div>
   <iframe src="./iframe.html" sandbox="allow-same-origin"></iframe>
+  <div>sandbox allow-scripts</div>
+    <iframe src="./iframe.html" sandbox="allow-scripts"></iframe>
+  <div>sandbox allow-same-origin and allow-scripts</div>
+  <iframe src="./iframe.html" sandbox="allow-scripts allow-same-origin"></iframe>
+
   </body>
 </html>
