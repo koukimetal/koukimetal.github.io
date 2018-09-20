@@ -12,6 +12,7 @@
 	<script>
   function receiver1234(e) {
     console.log(e.origin);
+    console.log(e);
     console.log(window.location.origin);
     window.document.querySelector('#content').innerText = e.data;
   }
