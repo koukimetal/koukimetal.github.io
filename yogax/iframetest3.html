@@ -1,0 +1,23 @@
+
+<html>
+
+<head>
+	<title> Sandbox</title>
+	<meta charset="UTF-8" />
+</head>
+
+<body>
+	<div id="content"></div>
+	<iframe id="inside" src="./iframe3.html" sandbox="allow-scripts"></iframe>
+	<script>
+  function receiver1234(e) {
+    console.log(e.origin);
+    console.log(e);
+    console.log(window.location.origin);
+    window.document.querySelector('#content').innerText = e.data;
+  }
+  window.addEventListener("message", receiver1234, false);
+	</script>
+</body>
+
+</html>

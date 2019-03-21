@@ -1,0 +1,15 @@
+
+<html>
+<head></head>
+<body>
+  <input type="text" id="message">
+  <button id="send">Send Message</button>
+  <script>
+  
+window.document.querySelector('#send').onclick = function() {
+  var value=window.document.querySelector('#message').value;
+  window.parent.postMessage(value, window.location.origin);
+};
+  </script>
+</body>
+</html>
